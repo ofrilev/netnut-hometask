@@ -5,6 +5,9 @@ import styled from "styled-components";
 export const SelectionsWrapper = styled.div`
   display: flex;
   width: 400px;
+  @media screen and (max-width: ${theme.layout.medium}) {
+    width: 95%;
+  }
   flex-direction: column;
   gap: 30px;
   .grey {

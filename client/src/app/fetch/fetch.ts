@@ -23,19 +23,17 @@ export const getData = async (): Promise<stepsFetchedData> => {
       plans: await plansRes.json(),
     } as stepsFetchedData;
   };
-export const postReq = async (
-    url: string,
+export const submitUseSelection = async (
     data: useSelection
   ): Promise<{ status: Request_status; response?: Request_status }> => {
     try {
-      const response = await fetchData(url, "POST", data);
+      const response = await fetchData("user-submissions", "POST", data);
   
       if (response.ok) {
         return {
           status: Request_status.succeed,
         };
       }
-  
       return {
         status: Request_status.failed,
       };

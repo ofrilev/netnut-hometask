@@ -1,6 +1,8 @@
 export const theme = {
     layout: {
+      min_mobile:"320px",
       mobile: "375px",
+      medium:"476px",
       desktop: "1440px",
     },
     colors: {

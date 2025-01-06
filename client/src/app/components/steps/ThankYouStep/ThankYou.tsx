@@ -6,30 +6,40 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 30px;
-  .info {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    color: ${theme.colors.neutral.lightGray};
-    font-size: 16px;
-    .last-line {
-      display: inline-block;
-      text-indent: 2em;
+  & > img {
+    height: 130px;
+    @media screen and (max-width: ${theme.layout.medium}) {
+      height: 80px;
     }
+  }
+
+  .description {
+    color: ${theme.colors.neutral.lightGray};
+    font-size: 18px;
+    @media screen and (max-width: ${theme.layout.medium}) {
+      font-size: 15px;
+    }
+    line-height: 1.8;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .description a {
+    color: ${theme.colors.neutral.coolGray};; 
+    text-decoration: none;
   }
 `;
 
 export const ThankYou = () => (
   <Wrapper>
-    <img src={iconThankYou} alt="iconThankYou" height={"130px"}></img>
+    <img src={iconThankYou} alt="iconThankYou" />
     <div className="StepTitle">Thank you!</div>
-    <div className="info">
+    <p className="description">
       Thanks for confirming your subscription! We hope you have fun using our
-      platform. If you ever need support, please feel
-      <div className="last-line">
-        free to email us at support@loremgaming.com.
-      </div>
-    </div>
+      platform. If you ever need support, please feel free to email us at
+      <a href="mailto:support@loremgaming.com"> support@loremgaming.com</a>.
+    </p>
   </Wrapper>
 );

@@ -21,15 +21,21 @@ export const StepWrapper = styled.div<{ isMobile: boolean }>`
     flex-direction: column;
     align-self: flex-start;
     gap: 10px;
+    @media screen and (max-width: ${theme.layout.mobile}) {
+      margin-bottom: 10px;
+    }
   }
   .StepTitle {
     color: ${theme.colors.primary.marineBlue};
     font-weight: ${theme.typography.fontWeights.bold};
     font-size: 36px;
+    @media screen and (max-width: ${theme.layout.mobile}) {
+      font-size: 25px;
+    }
   }
   .StepSubTitle {
     color: ${theme.colors.neutral.lightGray};
-    font-size: 12px;
+    font-size: 15px;
     font-weight: ${theme.typography.fontWeights.medium};
   }
 `;
@@ -41,7 +47,7 @@ export const DesktopWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  .uppersection{
+  .uppersection {
     width: 90%;
     display: flex;
     flex-direction: column;

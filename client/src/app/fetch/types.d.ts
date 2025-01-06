@@ -15,9 +15,10 @@ export type stepsFetchedData = {
     }[]
 }
 export type useSelection = {
-    userInfo: {
-        name: string, phone: string, email: string 
-    },
-    selectPlan: { plan:string, duration: string  },
-    addOns: [number]
+    Name: string,
+    Email: string,
+    PhoneNumber: string,
+    PlanID:number,
+    AddOnIDs: number[],
+
 }

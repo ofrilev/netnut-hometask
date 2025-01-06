@@ -26,8 +26,11 @@ export const StyledInputWrapper = styled.div<{ isErr: boolean }>`
   }
 
   & > input {
-    color: ${theme.colors.primary.marineBlue};
     width: 382px;
+    @media screen and (max-width: ${theme.layout.medium}) {
+      width: 100%;
+    }
+    color: ${theme.colors.primary.marineBlue};
     height: 22px;
     padding: 10px;
     border-radius: 10px;

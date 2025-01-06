@@ -1,15 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   webpack(config) {
-    eslint:{ignoreDuringBuilds : true}
     // Modify rules for SVGs
     config.module.rules.push({
       test: /\.svg$/,
-      oneOf: [,
+      oneOf: [
         {
           type: "asset/resource",
-          resourceQuery: { not: [/\.react/], },
+          resourceQuery: { not: [/\.react/] },
         },
       ],
     });

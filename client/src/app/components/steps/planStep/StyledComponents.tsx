@@ -6,6 +6,11 @@ import styled from "styled-components";
 export const ItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  @media screen and (max-width: ${theme.layout.medium}) {
+    margin-block: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
   gap: 15px;
 `;
 export const StyledItem = styled.div<{ ischose: boolean }>`
@@ -16,6 +21,15 @@ export const StyledItem = styled.div<{ ischose: boolean }>`
   padding: 15px;
   height: 150px;
   width: 130px;
+  @media screen and (max-width: ${theme.layout.medium}) {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    min-height: 40px;
+    height: fit-content;
+    max-height: 60px;
+    width: 230px;
+  }
   border: 2px solid ${theme.colors.neutral.lightGray};
   border-radius: 10px;
   box-shadow: 10px 10px 5px ${theme.colors.neutral.magnolia};
@@ -27,6 +41,10 @@ export const StyledItem = styled.div<{ ischose: boolean }>`
   & > img {
     margin-bottom: 50px;
     height: 40px;
+    @media screen and (max-width: ${theme.layout.medium}) {
+      height: 30px;
+      margin-bottom: unset;
+    }
   }
   .plan-details {
     display: flex;
@@ -36,6 +54,10 @@ export const StyledItem = styled.div<{ ischose: boolean }>`
       color: ${theme.colors.primary.marineBlue};
       font-size: 17px;
       font-weight: ${theme.typography.fontWeights.bold};
+      @media screen and (max-width: ${theme.layout.mobile}) {
+        font-size: ${theme.typography.fontSize};
+        font-weight: ${theme.typography.fontWeights.regular};
+      }
     }
     .planPrice {
       color: ${theme.colors.neutral.lightGray};
@@ -59,6 +81,9 @@ export const StyledToggle = styled.div`
   justify-content: center;
   border-radius: 10px;
   background-color: ${theme.colors.neutral.alabaster};
+  @media screen and (max-width: ${theme.layout.mobile}) {
+    margin-top: 20px;
+  }
   .duration {
     color: ${theme.colors.neutral.lightGray};
     font-weight: ${theme.typography.fontWeights.regular};

@@ -2,8 +2,8 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import GlobalStyles from "./GlobalStyles";
-import { GlobalFonts } from "./assets/fontsUtils";
 import { StepContextProvider } from "./components/stepContext/stepsContext";
+import "./global.css";
 
 export default function RootLayout({
   children,
@@ -15,7 +15,6 @@ export default function RootLayout({
       <StepContextProvider>
         <ThemeProvider theme={theme}>
           <body>{children}</body>
-          <GlobalFonts />
           <GlobalStyles />
         </ThemeProvider>
       </StepContextProvider>

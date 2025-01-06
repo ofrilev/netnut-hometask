@@ -18,6 +18,12 @@ const GlobalStyles = createGlobalStyle`
     body {
       padding: 30px;
     }
+    @media screen and (max-width: ${theme.layout.medium}) {
+      body{
+        overflow-x: hidden;
+      }
+
+    }
   }
 `;
 

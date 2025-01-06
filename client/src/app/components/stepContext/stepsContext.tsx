@@ -19,7 +19,9 @@ import { Buttons } from "./buttons";
 import { getFirstState } from "./helpers/getFirstState";
 import { getFirstStep } from "./helpers/getFirstStep";
 import { validateCurrentStep } from "./helpers/validateCurrentStep";
-import { getData } from "@/app/fetch/fetch";
+import { getData, submitUseSelection } from "@/app/fetch/fetch";
+import { useSelection } from "@/app/fetch/types";
+import { getUserSelection } from "./helpers/getUserSelection";
 
 interface StepContextType {
   stepsData: StepData;
@@ -85,8 +87,8 @@ export const StepContextProvider: FC<Props> = ({ children }) => {
 
   const handleNextClick = () => {
     if (isSummaryStep) {
-      console.log("Confirming step...");
-      // Add any additional logic for the summary step here
+      const userSelection = getUserSelection(stepState);
+      submitUseSelection(userSelection);
     }
     const isStepValid = validateCurrentStep({
       changeStepState,
@@ -94,6 +96,7 @@ export const StepContextProvider: FC<Props> = ({ children }) => {
       stepState,
     });
     if (isStepValid) {
+      
       goToNextStep();
     }
   };

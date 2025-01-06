@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useStepsContext } from  "@/app/components/stepContext/stepsContext";
-import { StepState, StepName } from  "@/app/components/stepContext/types";
+import { useStepsContext } from "@/app/components/stepContext/stepsContext";
+import { StepState, StepName } from "@/app/components/stepContext/types";
 import {
   ErrorField,
   FieldsWrapper,
@@ -9,7 +9,7 @@ import {
 
 export const Info: React.FC = () => {
   const { stepState, changeStepState, stepsData } = useStepsContext();
-  const {fieldNames, placeHolders} = stepsData.YourInfo
+  const { fieldNames, placeHolders } = stepsData.YourInfo;
   const { fields, errorMsgs } = stepState[
     StepName.YourInfo
   ] as StepState["YourInfo"];
@@ -56,9 +56,12 @@ export const Info: React.FC = () => {
                   field as keyof StepState["YourInfo"]["fields"]
                 )
               }
-              onBlur={() =>
-                handleBlur(field as keyof StepState["YourInfo"]["fields"])
-              }
+              onBlur={() => {
+                console.log("blurr");
+                return handleBlur(
+                  field as keyof StepState["YourInfo"]["fields"]
+                );
+              }}
             />
           </StyledInputWrapper>
         );
