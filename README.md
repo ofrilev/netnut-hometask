@@ -169,4 +169,4 @@ bun run start
 
 
 
-Open a web browser and navigate to http://localhost:8081 to access the application.
+Open a web browser and navigate to http://localhost:3000 to access the client.
