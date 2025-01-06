@@ -45,38 +45,6 @@ The `UserSubmissionAddOns` table links user submissions to their selected add-on
 This table allows for multiple add-ons to be associated with a single user submission.
 
 ![](database/database_schema.png)
-
-## Running and Connecting to the Database
-
-Follow these steps to set up and connect to the MySQL database using Docker:
-
-### Prerequisites
-- Ensure you have Docker and MySQL Client installed on your system.
-- Verify that the Docker service is running.
-
-### Steps to Build and Run the Database
-
-1. Navigate to the Database Directory:
-   ```bash
-   cd database/
-   ```
-2. Build the Docker Image: Build the Docker image for MySQL by running the following command:
-   ```bash
-   docker build -t my-mysql-image .
-   ```
-3. Run the Docker Container: Start a new Docker container with the following command:
-   ```bash
-   docker run -d -p 3306:3306 --name my-mysql-db -v my-db-data:/var/lib/mysql my-mysql-image
-   ```
-4. Connect to the MySQL Database: Use the following command to connect to the MySQL database:
-   ```bash
-   mysql -h 127.0.0.1 -P 3306 -u root -p
-   ```
-   Enter the password when prompted. You can find it in the Dockerfile under ENV MYSQL_ROOT_PASSWORD=rootpassword.
-5. Once connected, select the database you want to use:
-    ```bash
-   USE net_nut_db;
-   ```
    
 ## Notes
 
@@ -90,12 +58,13 @@ Follow these steps to set up and connect to the MySQL database using Docker:
 
 # API Overview
 
-This project also provides a RESTful API for managing subscription plans and add-ons, supporting standard CRUD operations.
+This project also provides a RESTful API for viewing plans and add-ons, and storing user submissions.
 
 ### Endpoints
 
-- **Plans**: Create, read, update, and delete subscription plans.
-- **AddOns**: Create, read, update, and delete add-ons for subscription plans.
+- **Plans**: Read subscription plans.
+- **AddOns**: Read subscription plans.
+- **UserSubmissions**: Create user submission.
 
 ## Viewing the Swagger Documentation
 
@@ -110,3 +79,94 @@ To view the API documentation using Swagger UI locally using Docker:
      docker run -p 8080:8080 -e SWAGGER_JSON=/api/openapi.yaml -v "$(pwd)"/api/openapi.yaml:/api/openapi.yaml swaggerapi/swagger-ui
      ```
    - Open your web browser and go to `http://localhost:8080`.
+
+NOTE: I added another file called `api/extended_openapi.yaml` where I started adding CRUD operations for both plans and addons.
+
+# Running the Project
+
+To run the server and database using Docker, use the following command:
+   ```bash
+   docker-compose up --build
+   ```
+   
+To stop the containers, use:
+   ```bash
+   docker-compose down
+   ```
+If you make changes to the database a volume cleanup is required, use:
+```bash
+docker volume rm your_project_name_my-db-data
+```
+
+## How to Access the Database Directly
+1. Connect to the MySQL Database: 
+   ```bash
+   mysql -h 127.0.0.1 -P 3306 -u root -p
+   ```
+   Enter the password when prompted. You can find it in the Dockerfile under ENV MYSQL_ROOT_PASSWORD=rootpassword.
+2. Once connected, select the database `net_nut_db`:
+    ```bash
+   USE net_nut_db;
+   ```
+   
+## How to Query the Server API Directly
+
+You can use curl to query the server API. Here are some examples:
+```bash
+curl http://localhost:8081/plans
+    
+[{"plan_id":1,"name":"Arcade","type":"Monthly","cost":"9.00","details":null},{"plan_id":2,"name":"Advanced","type":"Monthly","cost":"12.00","details":null},{"plan_id":3,"name":"Pro","type":"Monthly","cost":"15.00","details":null},{"plan_id":4,"name":"Arcade","type":"Yearly","cost":"90.00","details":"2 months free"},{"plan_id":5,"name":"Advanced","type":"Yearly","cost":"120.00","details":"2 months free"},{"plan_id":6,"name":"Pro","type":"Yearly","cost":"150.00","details":"2 months free"}]
+```
+
+```bash
+curl http://localhost:8081/addons
+
+[{"add_on_id":1,"title":"Online Service","description":"Access to multiplayer games","monthly_price":"1.00","yearly_price":"10.00"},{"add_on_id":2,"title":"Large Storage","description":"Extra 1TB of cloud save","monthly_price":"2.00","yearly_price":"20.00"},{"add_on_id":3,"title":"Customizable Profile","description":"Custom theme on your profile","monthly_price":"2.00","yearly_price":"20.00"}]
+```
+
+## App Overview
+
+This application is built using Next.js and React and runs with **Bun** as the JavaScript runtime. It leverages a context state manager to:
+
+- Render the correct step based on the application's state.
+- Fetch step data and the current state on the first app render.
+- Send the final user selections to the backend.
+
+## Features
+
+- **Responsive Design**: The app is fully responsive, fitting screens from mobile devices (230px width) to desktop.
+- **Styling Consistency**: Utilizes `styled-components` for modular and maintainable styles, along with global style variables to ensure consistency and an enhanced user experience (UX).
+
+## How to Access the UI
+
+## Running the App Locally
+
+To run the app in development mode, execute:
+
+```
+bun run dev
+```
+
+The local development server runs by default on port **3000**.
+
+## Building the App
+
+To build the app for production, execute:
+
+```
+bun run build
+```
+
+## Running the Built App
+
+To run the app after building, execute:
+
+```
+bun run start
+```
+
+
+
+
+
+Open a web browser and navigate to http://localhost:8081 to access the application.
