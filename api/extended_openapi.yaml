@@ -1,0 +1,328 @@
+openapi: 3.0.1
+info:
+  title: Subscription API
+  description: API for managing subscription plans and add-ons
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /plans:
+    get:
+      summary: Get all plans
+      responses:
+        '200':
+          description: A list of plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plan'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Type
+                - Cost
+              properties:
+                Name:
+                  type: string
+                  example: "Arcade"
+                Type:
+                  type: string
+                  enum:
+                    - Monthly
+                    - Yearly
+                  example: "Monthly"
+                Cost:
+                  type: number
+                  format: float
+                  example: 9.99
+                Details:
+                  type: string
+                  example: ""
+      responses:
+        '201':
+          description: Plan created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /plans/{planId}:
+    get:
+      summary: Get a plan by ID
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update a plan by ID
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+      responses:
+        '200':
+          description: Plan updated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a plan by ID
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Plan deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /addons:
+    get:
+      summary: Get all add-ons
+      responses:
+        '200':
+          description: A list of add-ons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddOn'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new add-on
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Title
+                - Description
+                - MonthlyPrice
+                - YearlyPrice
+              properties:
+                Title:
+                  type: string
+                  example: "Online service"
+                Description:
+                  type: string
+                  example: "Access to multiplayer games"
+                MonthlyPrice:
+                  type: number
+                  format: float
+                  example: 1.0
+                YearlyPrice:
+                  type: number
+                  format: float
+                  example: 10.0
+      responses:
+        '201':
+          description: Add-on created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /addons/{addonId}:
+    get:
+      summary: Get an add-on by ID
+      parameters:
+        - name: addonId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single add-on
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddOn'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+            $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update an add-on by ID
+      parameters:
+        - name: addonId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOn'
+      responses:
+        '200':
+          description: Add-on updated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete an add-on by ID
+      parameters:
+        - name: addonId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Add-on deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    Plan:
+      type: object
+      required:
+        - Name
+        - Type
+        - Cost
+        - PlanID
+      properties:
+        PlanID:
+          type: integer
+          example: 1
+        Name:
+          type: string
+          example: "Arcade"
+        Type:
+          type: string
+          enum:
+            - Monthly
+            - Yearly
+          example: "Yearly"
+        Cost:
+          type: number
+          format: float
+          example: 90.0
+        Details:
+          type: string
+          example: "2 months free"
+    AddOn:
+      type: object
+      required:
+        - AddOnID
+        - Title
+        - Description
+        - MonthlyPrice
+        - YearlyPrice
+      properties:
+        AddOnID:
+          type: integer
+          example: 1
+        Title:
+          type: string
+          example: "Online service"
+        Description:
+          type: string
+          example: "Access to multiplayer games"
+        MonthlyPrice:
+          type: number
+          format: float
+          example: 1.0
+        YearlyPrice:
+          type: number
+          format: float
+          example: 10.0
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Internal Server Error"
+              message:
+                type: string
+                example: "An unexpected error occurred. Please try again later."
+              status:
+                type: integer
+                example: 500
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Bad Request"
+              message:
+                type: string
+                example: "The request could not be understood or was missing required fields."
+              status:
+                type: integer
+                example: 400
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Not Found"
+              message:
+                type: string
+                example: "The requested resource was not found."
+              status:
+                type: integer
+                example: 404

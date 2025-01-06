@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Subscription API
+  description: API for managing subscription plans, add-ons, and user submissions
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /plans:
+    get:
+      summary: Get all plans or filter by type
+      parameters:
+        - name: type
+          in: query
+          description: Filter plans by type (Monthly or Yearly)
+          required: false
+          schema:
+            type: string
+            enum:
+              - Monthly
+              - Yearly
+      responses:
+        '200':
+          description: A list of plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /addons:
+    get:
+      summary: Get all add-ons
+      responses:
+        '200':
+          description: A list of add-ons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddOn'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /user-submissions:
+    post:
+      summary: Create a new user submission
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - UserName
+                - Email
+                - PlanID
+              properties:
+                UserName:
+                  type: string
+                  example: "John Doe"
+                Email:
+                  type: string
+                  format: email
+                  example: "john.doe@example.com"
+                PhoneNumber:
+                  type: string
+                  example: "+1234567890"
+                PlanID:
+                  type: integer
+                  example: 1
+                AddOnIDs:
+                  type: array
+                  items:
+                    type: integer
+                  example: [1, 2]
+      responses:
+        '201':
+          description: User submission created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSubmission'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    Plan:
+      type: object
+      required:
+        - Name
+        - Type
+        - Cost
+        - PlanID
+      properties:
+        PlanID:
+          type: integer
+          example: 1
+        Name:
+          type: string
+          example: "Arcade"
+        Type:
+          type: string
+          enum:
+            - Monthly
+            - Yearly
+          example: "Yearly"
+        Cost:
+          type: number
+          format: float
+          example: 90.0
+        Details:
+          type: string
+          example: "2 months free"
+
+    AddOn:
+      type: object
+      required:
+        - AddOnID
+        - Title
+        - Description
+        - MonthlyPrice
+        - YearlyPrice
+      properties:
+        AddOnID:
+          type: integer
+          example: 1
+        Title:
+          type: string
+          example: "Online service"
+        Description:
+          type: string
+          example: "Access to multiplayer games"
+        MonthlyPrice:
+          type: number
+          format: float
+          example: 1.0
+        YearlyPrice:
+          type: number
+          format: float
+          example: 10.0
+
+    UserSubmission:
+      type: object
+      properties:
+        SubmissionID:
+          type: integer
+          example: 1
+        UserName:
+          type: string
+          example: "John Doe"
+        Email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        PhoneNumber:
+          type: string
+          example: "+1234567890"
+        PlanID:
+          type: integer
+          example: 1
+        AddOnIDs:
+          type: array
+          items:
+            type: integer
+          example: [1, 2]
+        SubmissionDate:
+          type: string
+          format: date-time
+          example: "2023-10-05T14:48:00.000Z"
+
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Internal Server Error"
+              message:
+                type: string
+                example: "An unexpected error occurred. Please try again later."
+              status:
+                type: integer
+                example: 500
+
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Bad Request"
+              message:
+                type: string
+                example: "The request could not be understood or was missing required fields."
+              status:
+                type: integer
+                example: 400
+
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Not Found"
+              message:
+                type: string
+                example: "The requested resource was not found."
+              status:
+                type: integer
+                example: 404
