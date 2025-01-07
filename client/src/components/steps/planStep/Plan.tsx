@@ -23,13 +23,21 @@ export const Plan = () => {
 
   // Handle plan and duration changes
   const handleChange = (
-    value: number | Duration,
-    field: "plan" | "duration"
+    plan: { value: number },
+    duration?: { value: Duration }
   ) => {
+    const updatedFields = {
+      plan: plan.value,
+      ...(duration ? { duration: duration.value } : {}),
+    };
+
     changeStepState({
       [StepName.SelectPlan]: {
         ...stepState[StepName.SelectPlan],
-        fields: { ...fields, [field]: value },
+        fields: {
+          ...fields,
+          ...updatedFields,
+        },
       },
     });
   };
@@ -51,9 +59,15 @@ export const Plan = () => {
           <StyledItem
             key={plan.name}
             ischose={selectedPlan === plan.plan_id}
-            onClick={() => handleChange(plan.plan_id, "plan")}
+            onClick={() => handleChange({ value: plan.plan_id })}
           >
-            <Image className="icon" src={plan.icon} alt={`${plan.plan_id} Icon`} width={"40"} height={"40"}/>
+            <Image
+              className="icon"
+              src={plan.icon}
+              alt={`${plan.plan_id} Icon`}
+              width={"40"}
+              height={"40"}
+            />
             <div className="plan-details">
               <div className="planName">{plan.name}</div>
               <div className="planPrice">
@@ -71,12 +85,16 @@ export const Plan = () => {
         </div>
         <ToggleBarWrapper
           istoggled={isMonthly}
-          onClick={() =>
+          onClick={() => {
             handleChange(
-              isMonthly ? Duration.Yearly : Duration.Monthly, // Toggle duration between monthly and yearly
-              "duration"
-            )
-          }
+              {
+                value: isMonthly ? selectedPlan + 3 : selectedPlan - 3,
+              },
+              {
+                value: isMonthly ? Duration.Yearly : Duration.Monthly, // Toggle duration between monthly and yearly
+              }
+            );
+          }}
         >
           <ToggleCircle istoggled={isMonthly} />
         </ToggleBarWrapper>
