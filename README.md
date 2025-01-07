@@ -82,6 +82,47 @@ To view the API documentation using Swagger UI locally using Docker:
 
 NOTE: I added another file called `api/extended_openapi.yaml` where I started adding CRUD operations for both plans and addons.
 
+## App Overview
+
+This application is built using Next.js and React and runs with **Bun** as the JavaScript runtime. It leverages a context state manager to:
+
+- Render the correct step based on the application's state.
+- Fetch step data and the current state on the first app render.
+- Send the final user selections to the backend.
+
+## Features
+
+- **Responsive Design**: The app is fully responsive, fitting screens from mobile devices (230px width) to desktop.
+- **Styling Consistency**: Utilizes `styled-components` for modular and maintainable styles, along with global style variables to ensure consistency and an enhanced user experience (UX).
+
+## Running the App Locally
+
+To run the app in development mode, execute:
+
+```
+bun run dev
+```
+
+The local development server runs by default on port **3000**.
+
+## Building the App
+
+To build the app for production, execute:
+
+```
+bun run build
+```
+
+## Running the Built App
+
+To run the app after building, execute:
+
+```
+bun run start
+```
+
+
+
 # Running the Project
 
 To run the server and database using Docker, use the following command:
@@ -124,49 +165,6 @@ curl http://localhost:8081/addons
 [{"add_on_id":1,"title":"Online Service","description":"Access to multiplayer games","monthly_price":"1.00","yearly_price":"10.00"},{"add_on_id":2,"title":"Large Storage","description":"Extra 1TB of cloud save","monthly_price":"2.00","yearly_price":"20.00"},{"add_on_id":3,"title":"Customizable Profile","description":"Custom theme on your profile","monthly_price":"2.00","yearly_price":"20.00"}]
 ```
 
-## App Overview
-
-This application is built using Next.js and React and runs with **Bun** as the JavaScript runtime. It leverages a context state manager to:
-
-- Render the correct step based on the application's state.
-- Fetch step data and the current state on the first app render.
-- Send the final user selections to the backend.
-
-## Features
-
-- **Responsive Design**: The app is fully responsive, fitting screens from mobile devices (230px width) to desktop.
-- **Styling Consistency**: Utilizes `styled-components` for modular and maintainable styles, along with global style variables to ensure consistency and an enhanced user experience (UX).
-
 ## How to Access the UI
-
-## Running the App Locally
-
-To run the app in development mode, execute:
-
-```
-bun run dev
-```
-
-The local development server runs by default on port **3000**.
-
-## Building the App
-
-To build the app for production, execute:
-
-```
-bun run build
-```
-
-## Running the Built App
-
-To run the app after building, execute:
-
-```
-bun run start
-```
-
-
-
-
 
 Open a web browser and navigate to http://localhost:3000 to access the client.
