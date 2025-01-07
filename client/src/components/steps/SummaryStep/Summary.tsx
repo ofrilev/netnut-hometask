@@ -1,4 +1,4 @@
-import { useStepsContext } from "@/app/components/stepContext/stepsContext";
+import { useStepsContext } from "@/components/stepContext/stepsContext";
 import { Item, SelectionsWrapper } from "./StyledComponents";
 import { Duration } from "../../stepContext/types";
 
@@ -46,7 +46,10 @@ export const Summary = () => {
           </div>
           <div>{`$${Number(selectedPlanPrice)}`}</div>
         </Item>
-        <div className="border" style={{ borderTop: "1px solid #ccc", margin: "10px 0" }} />
+        <div
+          className="border"
+          style={{ borderTop: "1px solid #ccc", margin: "10px 0" }}
+        />
         {selectedAddons.map((addon, index) => (
           <Item key={index}>
             <div>{addon.title}</div>

@@ -1,4 +1,4 @@
-import { stepsFetchedData } from "@/app/fetch/types";
+import { stepsFetchedData } from "@/api/types";
 import { Addons } from "../steps/AddonsStep/Addons";
 import { Info } from "../steps/InfoStep/Info";
 import { Plan } from "../steps/planStep/Plan";

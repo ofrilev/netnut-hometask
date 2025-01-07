@@ -1,5 +1,5 @@
 "use client";
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import styled from "styled-components";
 
 export const ItemsWrapper = styled.div`

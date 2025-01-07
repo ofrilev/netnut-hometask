@@ -1,10 +1,10 @@
 "use client";
 import styled from "styled-components";
-import bgSidebarDesktop from "@/app/assets/svgs/bg-sidebar-desktop.svg";
-import bgSidebarMobile from "@/app/assets/svgs/bg-sidebar-mobile.svg";
-import { theme } from "@/app/theme";
+import bgSidebarDesktop from "@/assets/svgs/bg-sidebar-desktop.svg";
+import bgSidebarMobile from "@/assets/svgs/bg-sidebar-mobile.svg";
+import { theme } from "@/theme";
 
-export const StepFrame = styled.div<{ismobile: boolean}>`
+export const StepFrame = styled.div<{ ismobile: boolean }>`
   width: ${(props) => (props.ismobile ? `100%` : `273px`)};
   height: ${(props) => (props.ismobile ? `172px` : `568px`)};
   background-image: ${(props) =>

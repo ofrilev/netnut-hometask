@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useStepsContext } from "@/app/components/stepContext/stepsContext";
-import { StepState, StepName } from "@/app/components/stepContext/types";
+import { useStepsContext } from "@/components/stepContext/stepsContext";
+import { StepState, StepName } from "@/components/stepContext/types";
 import {
   ErrorField,
   FieldsWrapper,
@@ -37,10 +37,10 @@ export const Info: React.FC = () => {
       {["name", "email", "phone"].map((field, index) => {
         const isError = errorMsgs[field as keyof typeof errorMsgs] !== "";
         return (
-          <StyledInputWrapper key={field} isErr={isError}>
+          <StyledInputWrapper key={field} is_error={isError}>
             <div>
               <div>{fieldNames[index]}</div>
-              <ErrorField isErr={isError}>
+              <ErrorField is_error={isError}>
                 {errorMsgs[field as keyof typeof errorMsgs]}
               </ErrorField>
             </div>

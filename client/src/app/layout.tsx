@@ -1,9 +1,9 @@
 "use client";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
-import GlobalStyles from "./GlobalStyles";
-import { StepContextProvider } from "./components/stepContext/stepsContext";
-import "./global.css";
+import { theme } from "../theme";
+import GlobalStyles from "../GlobalStyles";
+import { StepContextProvider } from "../components/stepContext/stepsContext";
+// import "../";
 
 export default function RootLayout({
   children,

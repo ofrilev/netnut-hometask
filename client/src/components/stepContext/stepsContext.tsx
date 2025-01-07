@@ -19,8 +19,7 @@ import { Buttons } from "./buttons";
 import { getFirstState } from "./helpers/getFirstState";
 import { getFirstStep } from "./helpers/getFirstStep";
 import { validateCurrentStep } from "./helpers/validateCurrentStep";
-import { getData, submitUseSelection } from "@/app/fetch/fetch";
-import { useSelection } from "@/app/fetch/types";
+import { getData, submitUseSelection } from "@/api/fetch";
 import { getUserSelection } from "./helpers/getUserSelection";
 
 interface StepContextType {
@@ -96,7 +95,6 @@ export const StepContextProvider: FC<Props> = ({ children }) => {
       stepState,
     });
     if (isStepValid) {
-      
       goToNextStep();
     }
   };

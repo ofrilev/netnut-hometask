@@ -1,5 +1,5 @@
 "use client"
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import styled from "styled-components";
 export const NavBarButton = styled.button<{disabled?: boolean,isSummaryStep?:boolean}>`
 display: ${(props)=>(props.disabled ? "none": "block")};

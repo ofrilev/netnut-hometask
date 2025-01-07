@@ -1,5 +1,5 @@
-import { useStepsContext } from "@/app/components/stepContext/stepsContext";
-import { Duration, StepName } from "@/app/components/stepContext/types";
+import { useStepsContext } from "@/components/stepContext/stepsContext";
+import { Duration, StepName } from "@/components/stepContext/types";
 import { ItemsWrapper, StyledItem } from "./StyledComponents";
 import Checkbox from "./CheckBox";
 import { ErrorField } from "../StyledComponents";
@@ -46,7 +46,7 @@ export const Addons = () => {
             </div>
           </StyledItem>
         ))}
-        <ErrorField isErr={errorMsg != ""}>{errorMsg}</ErrorField>
+        <ErrorField is_error={errorMsg != ""}>{errorMsg}</ErrorField>
       </ItemsWrapper>
     </>
   );

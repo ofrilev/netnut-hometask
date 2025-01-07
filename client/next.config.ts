@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/form',
+        permanent: true, // Use `true` for a 308 redirect or `false` for a 307 redirect
+      },
+    ];
   },
   webpack(config) {
     // Modify rules for SVGs
@@ -18,5 +23,6 @@ const nextConfig: NextConfig = {
     return config;
   },
 };
+
 
 export default nextConfig;

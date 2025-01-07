@@ -1,6 +1,6 @@
 "use client";
 
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import styled from "styled-components";
 
 export const ItemsWrapper = styled.div`
@@ -38,9 +38,8 @@ export const StyledItem = styled.div<{ ischose: boolean }>`
   }
   border-color: ${(props) =>
     props.ischose && theme.colors.primary.purplishBlue};
-  & > img {
+  .icon {
     margin-bottom: 50px;
-    height: 40px;
     @media screen and (max-width: ${theme.layout.medium}) {
       height: 30px;
       margin-bottom: unset;

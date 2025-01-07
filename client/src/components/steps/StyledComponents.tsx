@@ -1,4 +1,4 @@
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import styled from "styled-components";
 
 export const FieldsWrapper = styled.div`
@@ -6,7 +6,7 @@ export const FieldsWrapper = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
-export const StyledInputWrapper = styled.div<{ isErr: boolean }>`
+export const StyledInputWrapper = styled.div<{ is_error: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: ${theme.colors.neutral.white};
@@ -46,10 +46,10 @@ export const StyledInputWrapper = styled.div<{ isErr: boolean }>`
       border-color: ${theme.colors.primary.pastelBlue};
     }
   }
-  border-color: ${(props) => props.isErr && theme.colors.primary.strawberryRed};
+  border-color: ${(props) => props.is_error && theme.colors.primary.strawberryRed};
 `;
-export const ErrorField = styled.div<{ isErr: boolean }>`
-  display: ${(props) => (props.isErr ? `block` : `none`)};
+export const ErrorField = styled.div<{ is_error: boolean }>`
+  display: ${(props) => (props.is_error ? `block` : `none`)};
   color: ${theme.colors.primary.strawberryRed};
   text-wrap: nowrap;
   font-size: 12px;

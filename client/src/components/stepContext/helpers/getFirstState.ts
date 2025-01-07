@@ -1,4 +1,4 @@
-import { stepsFetchedData } from "@/app/fetch/types";
+import { stepsFetchedData } from "@/api/types";
 import { initialStepState, StepState } from "../types";
 
 export const getFirstState = (fetchedStepsData: stepsFetchedData): StepState => {

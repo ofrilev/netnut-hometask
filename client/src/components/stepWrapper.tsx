@@ -1,5 +1,5 @@
 "use client";
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import styled from "styled-components";
 
 export const StepWrapper = styled.div<{ isMobile: boolean }>`
@@ -37,6 +37,7 @@ export const StepWrapper = styled.div<{ isMobile: boolean }>`
     color: ${theme.colors.neutral.lightGray};
     font-size: 15px;
     font-weight: ${theme.typography.fontWeights.medium};
+    margin-bottom: 10px;
   }
 `;
 export const DesktopWrapper = styled.div`

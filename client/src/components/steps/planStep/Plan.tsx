@@ -1,8 +1,8 @@
-import { useStepsContext } from "@/app/components/stepContext/stepsContext";
-import { StepName, Duration } from "@/app/components/stepContext/types"; // Use Duration enum
-import arcadeIcon from "@/app/assets/svgs/icon-arcade.svg";
-import advancedIcon from "@/app/assets/svgs/icon-advanced.svg";
-import proIcon from "@/app/assets/svgs/icon-pro.svg";
+import { useStepsContext } from "@/components/stepContext/stepsContext";
+import { StepName, Duration } from "@/components/stepContext/types"; // Use Duration enum
+import arcadeIcon from "@/assets/svgs/icon-arcade.svg";
+import advancedIcon from "@/assets/svgs/icon-advanced.svg";
+import proIcon from "@/assets/svgs/icon-pro.svg";
 import {
   ItemsWrapper,
   StyledItem,
@@ -10,6 +10,7 @@ import {
   ToggleBarWrapper,
   ToggleCircle,
 } from "./StyledComponents";
+import Image from "next/image";
 
 export const Plan = () => {
   const { stepState, changeStepState, stepsData } = useStepsContext();
@@ -52,7 +53,7 @@ export const Plan = () => {
             ischose={selectedPlan === plan.plan_id}
             onClick={() => handleChange(plan.plan_id, "plan")}
           >
-            <img src={plan.icon} alt={`${plan.plan_id} Icon`} />
+            <Image className="icon" src={plan.icon} alt={`${plan.plan_id} Icon`} width={"40"} height={"40"}/>
             <div className="plan-details">
               <div className="planName">{plan.name}</div>
               <div className="planPrice">

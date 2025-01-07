@@ -1,6 +1,7 @@
 "use client";
-import iconThankYou from "@/app/assets/svgs/icon-thank-you.svg";
-import { theme } from "@/app/theme";
+import iconThankYou from "@/assets/svgs/icon-thank-you.svg";
+import { theme } from "@/theme";
+import Image from "next/image";
 import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const Wrapper = styled.div`
   align-items: center;
   text-align: center;
   gap: 30px;
-  & > img {
+  .thank-you-icon {
     height: 130px;
     @media screen and (max-width: ${theme.layout.medium}) {
       height: 80px;
@@ -27,14 +28,20 @@ const Wrapper = styled.div`
   }
 
   .description a {
-    color: ${theme.colors.neutral.coolGray};; 
+    color: ${theme.colors.neutral.coolGray};
     text-decoration: none;
   }
 `;
 
 export const ThankYou = () => (
   <Wrapper>
-    <img src={iconThankYou} alt="iconThankYou" />
+    <Image
+      className="thank-you-icon "
+      src={iconThankYou}
+      alt="iconThankYou"
+      width={"130"}
+      height={"130"}
+    />
     <div className="StepTitle">Thank you!</div>
     <p className="description">
       Thanks for confirming your subscription! We hope you have fun using our

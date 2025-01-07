@@ -1,4 +1,4 @@
-import { useSelection } from "@/app/fetch/types";
+import { useSelection } from "@/api/types";
 import { StepState } from "../types";
 
 export const getUserSelection = (stepState:StepState ): useSelection => {
