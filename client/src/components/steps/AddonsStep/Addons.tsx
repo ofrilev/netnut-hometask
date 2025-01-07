@@ -2,13 +2,12 @@ import { useStepsContext } from "@/components/stepContext/stepsContext";
 import { Duration, StepName } from "@/components/stepContext/types";
 import { ItemsWrapper, StyledItem } from "./StyledComponents";
 import Checkbox from "./CheckBox";
-import { ErrorField } from "../StyledComponents";
 
 export const Addons = () => {
   const { stepState, changeStepState, stepsData } = useStepsContext();
   const { addons } = stepsData.AddOns;
   const selectedDuration = stepState.SelectPlan.fields.duration;
-  const { fields, errorMsg } = stepState.AddOns;
+  const { fields } = stepState.AddOns;
 
   const handleClick = (addonId: number) => {
     const updatedFields = fields.map((field) =>
@@ -46,7 +45,6 @@ export const Addons = () => {
             </div>
           </StyledItem>
         ))}
-        <ErrorField is_error={errorMsg != ""}>{errorMsg}</ErrorField>
       </ItemsWrapper>
     </>
   );

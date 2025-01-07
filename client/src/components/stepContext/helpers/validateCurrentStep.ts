@@ -50,26 +50,6 @@ export const validateCurrentStep = (
       });
       break;
     }
-    case StepName.AddOns: {
-      const { fields } = stepState.AddOns;
-      const selection = Object.values(fields).find(field => field.selected==true)
-      if(!selection){
-        changeStepState({
-          AddOns: {
-            ...stepState.AddOns,
-            errorMsg: ErrorMsg.noSelection, 
-          },
-        }); 
-        isValid = false;
-      }else{
-        changeStepState({
-          AddOns: {
-            ...stepState.AddOns,
-            errorMsg: "", 
-      },});
-      break;
-    }
-  }
     default:
       break;
   }
