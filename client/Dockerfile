@@ -19,8 +19,11 @@ RUN bun install
 # Step 7: Copy the rest of the client-side code
 COPY . .
 
-# Step 8: Expose the port for Bun dev server (default: 3000)
+# Step 8: Build the Next.js application
+RUN bun run build
+
+# Step 9: Expose the port for the Next.js server (default: 3000)
 EXPOSE 3000
 
-# Step 9: Run the Bun development server
+# Step 10: Run the Next.js production server
 CMD ["bun", "start"]
