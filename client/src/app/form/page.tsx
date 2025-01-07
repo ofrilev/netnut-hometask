@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { SideBar } from "@/components/sideBar/sideBar";
 import { useStepsContext } from "@/components/stepContext/stepsContext";
@@ -25,7 +26,6 @@ const Form = () => {
       await firstFetch();
     };
     fetch().then(() => setLoading(false));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
