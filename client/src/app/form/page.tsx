@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { SideBar } from "@/components/sideBar/sideBar";
 import { useStepsContext } from "@/components/stepContext/stepsContext";
@@ -26,7 +25,7 @@ const Form = () => {
       await firstFetch();
     };
     fetch().then(() => setLoading(false));
-  }, []);
+  }, [loading]);
 
   return (
     <>
